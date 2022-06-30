@@ -1,0 +1,30 @@
+Install Docker for China [Ubuntu 18.04]https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+
+1.Uninstall old versions
+	sudo apt remove docker docker-engine docker.io containerd runc
+
+2.Set up the repository
+	sudo apt update
+	sudo apt install ca-certificates curl gnupg lsb-release
+
+3.Add Docker’s official GPG key
+	sudo mkdir -p /etc/apt/keyrings
+	官方 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+	中科大 curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+	清华 curl -fsSL https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+4.Use the following command to set up the repository:
+	官方 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	中科大 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	清华 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	
+	
+5.Install Docker Engine
+	sudo apt update
+	sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+	
+	
+666.Uninstall Docker Engine
+	sudo apt purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
+	sudo rm -rf /var/lib/docker
+	sudo rm -rf /var/lib/containerd
